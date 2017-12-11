@@ -23,5 +23,18 @@ namespace PatientData.Controllers
         {
             return Ok(await ThePatientCollection.Find(_ => true).ToListAsync());
         }
+
+        public async Task<IHttpActionResult> Get (string id)
+        {
+            var patient = await ThePatientCollection.FindAsync(p => p.Id == id);
+
+            if (patient != null)
+            {
+                return Ok(patient.FirstOrDefault());
+            }
+
+            return NotFound();
+        }
     }
+
 }
