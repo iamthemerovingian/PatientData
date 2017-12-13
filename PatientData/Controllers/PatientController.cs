@@ -24,7 +24,7 @@ namespace PatientData.Controllers
             return Ok(await ThePatientCollection.Find(_ => true).ToListAsync());
         }
 
-        public async Task<IHttpActionResult> Get (string id)
+        public async Task<IHttpActionResult> Get(string id)
         {
             var patient = await ThePatientCollection.FindAsync(p => p.Id == id);
 
@@ -35,6 +35,21 @@ namespace PatientData.Controllers
 
             return NotFound();
         }
+
+        [Route("api/patient/{id}/medications")]
+        public async Task<IHttpActionResult> GetMedications(string id)
+        {
+            var patient = await ThePatientCollection.FindAsync(p => p.Id == id);
+
+            if (patient != null)
+            {
+                return Ok(patient.FirstOrDefault().Medications);
+            }
+
+            return NotFound();
+        }
+
+
     }
 
 }
