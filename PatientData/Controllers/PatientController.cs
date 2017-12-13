@@ -7,9 +7,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace PatientData.Controllers
 { 
+    [Authorize]
+    [EnableCors("*","*","8")]
     public class PatientController : ApiController
     {
         private readonly IMongoCollection<Patient> ThePatientCollection;
